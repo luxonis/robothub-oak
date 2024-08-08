@@ -429,6 +429,7 @@ class SdkLiveView(LiveView):
                          before_seconds: int,
                          after_seconds: int,
                          title: str,
+                         metadata: Optional[dict] = None,
                          ) -> None:
         """
         Saves a video event to the frame buffer, then calls `on_complete` when the video is ready.
@@ -445,7 +446,7 @@ class SdkLiveView(LiveView):
 
         # We need to start a new thread because we cannot block the main thread.
         def on_complete(video_path):
-            send_video_event(video_path, title)
+            send_video_event(video_path, title, metadata)
 
         kwargs = {
             'before_seconds': before_seconds,

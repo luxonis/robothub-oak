@@ -88,7 +88,8 @@ class FrameBuffer:
                          frame_width: int,
                          frame_height: int,
                          on_complete: Optional[Callable] = None,
-                         delete_after_complete: bool = False
+                         delete_after_complete: bool = False,
+                         metadata: Optional[dict] = None,
                          ) -> threading.Thread:
         """
         Saves a video event to the frame buffer, then calls `on_complete` when the video is ready.
@@ -107,7 +108,7 @@ class FrameBuffer:
         """
 
         def on_complete_default(video_path):
-            send_video_event(video_path, title)
+            send_video_event(video_path, title, metadata)
 
         if on_complete is None:
             on_complete = on_complete_default
